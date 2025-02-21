@@ -45,4 +45,20 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Relation : Un utilisateur peut avoir plusieurs réservations.
+     */
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
+    /**
+     * Relation : Un utilisateur peut être associé à plusieurs créneaux horaires.
+     */
+    public function timeslots()
+    {
+        return $this->hasMany(Timeslot::class);
+    }
 }
