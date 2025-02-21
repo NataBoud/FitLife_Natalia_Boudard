@@ -23,6 +23,8 @@ La salle de sport “FitLife” souhaite mettre en place une application web per
 
 ![MCD_FitLife](/modélisation_conception/Diagrammes_de_classes_FitLife.png)
 
+maquette FIGMA vient dans le future !!!
+
 # 🛡️ 2️⃣ Développement (fonctionnalités essentielles)
 
 ## 🛠️ Installation et démarrage du projet Laravel
@@ -34,4 +36,6 @@ laravel new fitlife
 cd fitlife
 npm install && npm run build
 php artisan serve
+
 ```
+

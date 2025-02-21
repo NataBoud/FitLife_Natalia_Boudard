@@ -17,7 +17,8 @@ class FitnessClassFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'class_name' => fake()->randomElement(['yoga', 'cardio', ' musculation']),
+            'description' => fake()->paragraph(2), 
         ];
     }
 }

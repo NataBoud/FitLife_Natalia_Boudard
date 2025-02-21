@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Timeslot;
+use App\Models\Booking;
+use App\Models\FitnessClass;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,7 +16,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::factory(10)->create();
+        Timeslot::factory(5)->create();
+        Booking::factory(20)->create();
+        FitnessClass::factory(20)->create();
 
         User::factory()->create([
             'name' => 'Test User',

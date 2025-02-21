@@ -14,7 +14,8 @@ return new class extends Migration
     {
         Schema::create('timeslots', function (Blueprint $table) {
             $table->id();
-            $table->integer('max_capacity'); 
+            $table->integer('max_capacity');
+            $table->dateTime('date_time');
             $table->foreignIdFor(Coach::class)
                 ->constrained()
                 ->cascadeOnDelete(); 

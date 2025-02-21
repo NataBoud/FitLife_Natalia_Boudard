@@ -8,58 +8,80 @@ use Illuminate\Http\Request;
 class FitnessClassController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Affiche une liste de tous les cours de fitness.
      */
-    public function index()
+    public function home()
     {
-        //
+        $fitnessClasses = FitnessClass::orderBy('created_at', 'desc')-> get();
+        return view('home', compact('fitnessClasses'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     *  APRES AUTENTIFICATION DE L'UTILISATEUR
+     */
+    
+    /**
+     * Affiche le formulaire de création d'un nouveau cours de fitness.
      */
     public function create()
     {
-        //
+        return view('fitness_classes.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Enregistre un nouveau cours de fitness dans la base de données.
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'class_name' => 'required|max:255',
+            'description' => 'nullable|string',
+        ]);
+
+        FitnessClass::create($validated);
+
+        return redirect()->route('fitness_classes.index')->with('success', 'Cours de fitness créé avec succès.');
     }
 
     /**
-     * Display the specified resource.
+     * Affiche les détails d'un cours de fitness spécifique.
      */
-    public function show(FitnessClass $fitnessClass)
+    public function show($id)
     {
-        //
+        $fitnessClass = FitnessClass::findOrFail($id);
+        return view('fitness_classes.show', compact('fitnessClass'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Affiche le formulaire d'édition d'un cours de fitness existant.
      */
     public function edit(FitnessClass $fitnessClass)
     {
-        //
+        return view('fitness_classes.edit', compact('fitnessClass'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Met à jour un cours de fitness existant dans la base de données.
      */
     public function update(Request $request, FitnessClass $fitnessClass)
     {
-        //
+        $validated = $request->validate([
+            'class_name' => 'required|max:255',
+            'description' => 'nullable|string',
+        ]);
+
+        $fitnessClass->update($validated);
+
+        return redirect()->route('fitness_classes.show', $fitnessClass)->with('success', 'Cours de fitness mis à jour avec succès.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Supprime un cours de fitness de la base de données.
      */
     public function destroy(FitnessClass $fitnessClass)
     {
-        //
+        $fitnessClass->delete();
+
+        return redirect()->route('fitness_classes.index')->with('success', 'Cours de fitness supprimé avec succès.');
     }
 }
