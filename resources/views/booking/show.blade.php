@@ -14,12 +14,12 @@
                 <!-- Boucle sur les réservations de l'utilisateur -->
 
                 <div class="mb-4">
-                    <h3 class="text-lg font-semibold">Réservation de {{ $booking->timeslot->fitnessClasses->first()->class_name }}</h3>
+                    <h3 class="text-lg font-semibold">Réservation de {{ $booking->fitnessClass->class_name }}</h3>
 
                     <!-- Affichage du coach associé -->
                     <p class="mt-2">
                         <strong>Coach choisi:</strong>
-                        {{ $booking->timeslot && $booking->timeslot->coach ? $booking->timeslot->coach->name : 'Non spécifié' }}
+                        {{ $coach ? $coach->name : 'Non spécifié' }}
                     </p>
 
                     <!-- Affichage du timeslot associé -->

@@ -20,4 +20,9 @@ class Coach extends Model
     {
         return $this->belongsToMany(FitnessClass::class);
     }
+
+    public function timeslots()
+    {
+        return $this->hasMany(Timeslot::class);
+    }
 }

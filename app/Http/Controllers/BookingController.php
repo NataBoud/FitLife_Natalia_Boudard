@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\User;
+use App\Models\Coach;
 use Illuminate\Http\Request;
 use App\Models\FitnessClass;
 
@@ -54,12 +55,13 @@ class BookingController extends Controller
      */
     public function show(Booking $booking)
     {
-        $booking = Booking::with(['fitnessClass', 'timeslot.coach', 'timeslot.fitnessClasses'])
+        $booking = Booking::with(['fitnessClass', 'timeslot.coach'])
             ->where('user_id', 1)
             ->where('id', $booking->id)
             ->firstOrFail();
-
-        return view('booking.show', compact('booking'));
+        // dd($booking);
+        $coach = Coach::find($booking->coach_id);
+        return view('booking.show', compact('booking', 'coach'));
     }
 
     /**
