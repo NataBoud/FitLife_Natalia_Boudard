@@ -59,6 +59,6 @@ class User extends Authenticatable
      */
     public function timeslots()
     {
-        return $this->hasMany(Timeslot::class);
+        return $this->belongsToMany(Timeslot::class,'user_timeslot');
     }
 }

@@ -34,4 +34,9 @@ class Timeslot extends Model
     {
         return $this->belongsToMany(FitnessClass::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

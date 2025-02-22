@@ -21,6 +21,16 @@ class DatabaseSeeder extends Seeder
         Booking::factory(20)->create();
         FitnessClass::factory(20)->create();
 
+         // Création des relations many-to-many entre User et Timeslot
+        User::all()->each(function ($user) {
+            $user->timeslots()->attach(Timeslot::inRandomOrder()->limit(3)->get());
+        });
+
+        // Création des relations many-to-many entre FitnessClass et Timeslot
+        FitnessClass::all()->each(function ($fitnessClass) {
+            $fitnessClass->timeslots()->attach(Timeslot::inRandomOrder()->limit(3)->get());
+        });
+
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',

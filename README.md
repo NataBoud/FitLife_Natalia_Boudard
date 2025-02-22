@@ -13,15 +13,15 @@ La salle de sport “FitLife” souhaite mettre en place une application web per
 
 ✅ Diagrammes MCD (Modèle Conceptuel de Données)
 
-![MCD_FitLife](/modélisation_conception/MCD_FitLife.png)
+![MCD_FitLife](/modélisation-conception/MCD_FitLife.png)
 
 ✅ Diagrammes MLD (Modèle Logique de Données)
 
-![MCD_FitLife](/modélisation_conception/MLD_FitLife.png)
+![MCD_FitLife](/modélisation-conception/MLD_FitLife.png)
 
 ✅ Diagramme de classes UML
 
-![MCD_FitLife](/modélisation_conception/Diagrammes_de_classes_FitLife.png)
+![MCD_FitLife](/modélisation-conception/Diagrammes_de_classes_FitLife.png)
 
 maquette FIGMA vient dans le future !!!
 

@@ -14,11 +14,7 @@ class Booking extends Model
 
     protected $table = 'bookings';
 
-    protected $fillable = [
-        'status',
-        'timeslot_id',
-        'user_id',
-    ];
+    protected $fillable = ['timeslot_id', 'coach_id', 'user_id', 'fitness_class_id'];
 
     public function timeslot()
     {
@@ -28,5 +24,11 @@ class Booking extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    
+    public function fitnessClass()
+    {
+        return $this->belongsTo(FitnessClass::class, 'fitness_class_id');
     }
 }

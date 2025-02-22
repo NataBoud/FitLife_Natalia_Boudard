@@ -10,16 +10,16 @@ class FitnessClassController extends Controller
     /**
      * Affiche une liste de tous les cours de fitness.
      */
-    public function home()
+    public function index()
     {
-        $fitnessClasses = FitnessClass::orderBy('created_at', 'desc')-> get();
+        $fitnessClasses = FitnessClass::orderBy('created_at', 'desc')->paginate(3);
         return view('home', compact('fitnessClasses'));
     }
 
     /**
      *  APRES AUTENTIFICATION DE L'UTILISATEUR
      */
-    
+
     /**
      * Affiche le formulaire de création d'un nouveau cours de fitness.
      */
