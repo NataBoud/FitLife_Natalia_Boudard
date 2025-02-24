@@ -4,25 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\FitnessClass;
 
 class Coach extends Model
 {
     /** @use HasFactory<\Database\Factories\CoachFactory> */
     use HasFactory;
-    protected $table = 'coaches';
 
-    protected $fillable = [
-        'name',
-    ];
+    protected $fillable = ['name', 'email', 'phone'];
 
-    public function fitnessClasses()
+    public function horaires()
     {
-        return $this->belongsToMany(FitnessClass::class);
-    }
-
-    public function timeslots()
-    {
-        return $this->hasMany(Timeslot::class);
+        return $this->hasMany(Horaire::class);
     }
 }

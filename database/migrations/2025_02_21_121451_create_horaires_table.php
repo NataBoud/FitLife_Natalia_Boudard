@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\Coach;
+use App\Models\Cours;
 
 return new class extends Migration
 {
@@ -12,13 +13,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('timeslots', function (Blueprint $table) {
+        Schema::create('horaires', function (Blueprint $table) {
             $table->id();
-            $table->integer('max_capacity');
-            $table->dateTime('date_time');
-            $table->foreignIdFor(Coach::class)
-                ->constrained()
-                ->cascadeOnDelete(); 
+            $table->string('jour');
+            $table->time('heure_debut');
+            $table->time('heure_fin');
+            $table->foreignIdFor(Cours::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Coach::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('timeslots');
+        Schema::dropIfExists('horaires');
     }
 };

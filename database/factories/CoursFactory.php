@@ -2,14 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\FitnessClass;
-use App\Models\Coach;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\FitnessClass>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Cours>
  */
-class FitnessClassFactory extends Factory
+class CoursFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,7 +17,7 @@ class FitnessClassFactory extends Factory
     public function definition(): array
     {
         return [
-            'class_name' => $this->faker->randomElement([
+            'name' => $this->faker->randomElement([
                 'yoga',
                 'cardio',
                 'musculation',
@@ -38,17 +36,5 @@ class FitnessClassFactory extends Factory
             ]),
             'description' => $this->faker->paragraph(2),
         ];
-    }
-
-    /**
-     * Indique après la création de la classe de fitness, associer un coach.
-     */
-    public function configure()
-    {
-        return $this->afterCreating(function (FitnessClass $fitnessClass) {
-            $randomCount = rand(1, 3);
-            $coaches = Coach::inRandomOrder()->take($randomCount)->get();
-            $fitnessClass->coaches()->attach($coaches);
-        });
     }
 }
