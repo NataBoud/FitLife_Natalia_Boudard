@@ -14,30 +14,64 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      */
-   public function run()
-{
-    User::factory(10)->create();
-    Coach::factory(5)->create();
-    Cours::factory(15)->create();
+    public function run()
+    {
+        // Création des utilisateurs et des coachs
+        User::factory(10)->create();
+        Coach::factory(5)->create();
 
-    $coachs = Coach::all();
-    $cours = Cours::all()->shuffle(); // Mélange
-    $coursParCoach = $cours->chunk(3); // Découpe en groupes de 3
+        // Création des cours
+        $coursNames = [
+            'yoga',
+            'cardio',
+            'musculation',
+            'pilates',
+            'zumba',
+            'aérobic',
+            'stretching',
+            'spinning',
+            'boxe',
+            'crossfit',
+            'danse',
+            'kickboxing',
+            'fitness',
+            'métabolisme',
+            'taï-chi'
+        ];
 
-    foreach ($coachs as $index => $coach) {
-        if (isset($coursParCoach[$index])) {
-            foreach ($coursParCoach[$index] as $cours) {
-                Horaire::factory(3)->create([
+        foreach ($coursNames as $name) {
+            Cours::factory()->create([
+                'name' => $name
+            ]);
+        }
+
+        // Pour chaque cours, associer plusieurs coachs
+        $coachs = Coach::all();
+        $cours = Cours::all();
+
+        foreach ($cours as $cours) {
+            // Associer le cours à 3 coachs différents
+            $coachIds = $coachs->random(3)->pluck('id');  // Sélectionner 3 coachs aléatoires
+
+            foreach ($coachIds as $coachId) {
+                // Pour chaque coach, créer un horaire pour ce cours
+                Horaire::factory()->create([
                     'cours_id' => $cours->id,
-                    'coach_id' => $coach->id,
+                    'coach_id' => $coachId,
                 ]);
             }
         }
+
+        // Création des réservations pour les utilisateurs
+        User::all()->each(function ($user) {
+            $reservations = Reservation::factory(2)->create(['user_id' => $user->id]);
+
+            // Attacher des horaires aux réservations
+            $horaires = Horaire::inRandomOrder()->limit(3)->pluck('id'); // Sélectionner 3 horaires aléatoires
+
+            foreach ($reservations as $reservation) {
+                $reservation->horaires()->attach($horaires);
+            }
+        });
     }
-
-    User::all()->each(function ($user) {
-        Reservation::factory(2)->create(['user_id' => $user->id]);
-    });
-}
-
 }

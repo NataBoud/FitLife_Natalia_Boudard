@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
-use App\Models\Horaire;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Reservation>
@@ -20,7 +19,6 @@ class ReservationFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'horaire_id' => Horaire::inRandomOrder()->first()->id,
         ];
     }
 }

@@ -24,9 +24,9 @@ class Horaire extends Model
         return $this->belongsTo(Cours::class);
     }
 
-    // Un horaire peut être réservé plusieurs fois par différents utilisateurs.
+    // Reservation peut avoir plusieurs horaires
     public function reservations()
     {
-        return $this->hasMany(Reservation::class);
+        return $this->belongsToMany(Reservation::class, 'horaire_reservation');
     }
 }
